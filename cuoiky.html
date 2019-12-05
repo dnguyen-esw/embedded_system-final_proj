@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<style type="text/css">
+	BODY {
+		width: 1000PX;
+		height: 500PX;
+	}
+
+	#chart-container {
+		width: 75%;
+		height: auto;
+	}
+	
+	#chart-container1 {
+		width: 75%;
+		height: auto;
+	}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
+		<title> Embedded System</title>
+		<style>
+			body{
+				background-image: url('image/tuong.jpg');
+				}
+			
+			.canvas-container {
+			max-height: 300px;
+			max-width: 800px;
+			position: relative;
+				}
+
+
+			   #graphCanvas {
+			height: 200px;
+			width: 500px;
+			position: absolute;
+			left: 20%;
+			top: 0%;
+			 }
+			  #graphCanvas1 {
+			height: 200px;
+			width: 500px;
+			position: absolute;
+			left: 19%;
+			top: 40%;
+			 }
+			th, td {
+		  text-align: center;
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		}
+			.button {
+		  background-color: #33BBFF;
+		  border: ridge;
+		  color: black;
+		  padding: 6px 3px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 5px 0px;
+		  cursor: pointer;
+		}
+		
+			.btshutdown {
+		  position:relative;
+		  left:60px;
+		  background-color: #FF3933;
+		  border: ridge;
+		  color: black;
+		  padding: 9px 6px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 5px 0px;
+		  cursor: pointer;
+		}
+		
+			.button5 {border-radius: 10px;}
+			.btpos {
+		  position: absolute;
+		  left: 150px;
+		}
+		.dot1 {
+		  position: absolute;
+		  left: 1200px;
+		  top: 250px;
+		  display: inline;
+		  height: 100px;
+		  width: 100px;
+		  border-radius: 50%;
+		  text-align: center;
+		  font-family: Times New Roman;
+		  vertical-align: middle;
+		  line-height: 100px; 
+		  font-size: 25px;
+		  border-style: groove;
+		  -webkit-animation: mymove1 2s infinite; /* Chrome, Safari, Opera */
+		  animation: mymove1 2s infinite;
+		}
+		@-webkit-keyframes mymove1 {
+		from {background-image: radial-gradient(yellow, #f93e03,yellow);}
+		to {background-image: radial-gradient(#f93e03, yellow,#f93e03);}
+		}
+		.dot2 {
+		  position: absolute;
+		  left: 1365px;
+		  top: 250px;
+		  display: inline;
+		  height: 100px;
+		  width: 100px;
+		  border-radius: 50%;
+		  text-align: center;
+		  font-family: Times New Roman;
+		  vertical-align: middle;
+		  line-height: 100px; 
+		  font-size: 25px;
+		  border-style: groove;
+		  -webkit-animation: mymove2 2s infinite; /* Chrome, Safari, Opera */
+		  animation: mymove2 2s infinite;
+		}
+		@-webkit-keyframes mymove2 {
+		from {background-image: radial-gradient(circle,cyan,dodgerblue, cyan);}
+		to {background-image: radial-gradient(circle,dodgerblue,cyan, dodgerblue);}
+		}
+		.dot3 {
+		  position: absolute;
+		  left: 1530px;
+		  top: 250px;
+		  display: inline;
+		  height: 100px;
+		  width: 100px;
+		  border-radius: 50%;
+		  text-align: center;
+		  font-family: Times New Roman;
+		  vertical-align: middle;
+		  line-height: 100px; 
+		  font-size: 25px;
+		  border-style: groove;
+		  -webkit-animation: mymove3 2s infinite; /* Chrome, Safari, Opera */
+		  animation: mymove3 2s infinite;
+		}
+		@-webkit-keyframes mymove3 {
+		from {background-image: radial-gradient(circle,#ecf0f1,#b2babb, #ecf0f1);}
+		to {background-image: radial-gradient(circle,#b2babb,#ecf0f1, #b2babb);}
+		}
+		.image1{
+			position: absolute;
+		  left: 1200px;
+		  top: 155px;
+		  width:100px;
+		  height:100px;
+		}
+		.image2{
+			position: absolute;
+		  left: 1360px;
+		  top: 150px;
+		  width:115px;
+		  height:115px;
+		}
+		.image3{
+			position: absolute;
+		  left: 1535px;
+		  top: 155px;
+		  width:90px;
+		  height:90px;
+		}
+		.zui-table {
+    border: solid 1px #A0E3E3;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 13px Arial, sans-serif;
+}
+.zui-table th {
+    background-color: #A0E3E3;
+    border: solid 1px #A0E3E3;
+    color: #336B6B;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #fff;
+}
+.zui-table td {
+    border: solid 1px #A0E3E3;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
+}
+.alarm {
+  position: absolute;
+  left: 175px;
+}
+		</style>
+		<script>
+		function startTime() {
+		  var today = new Date();
+		  var h = today.getHours();
+		  var m = today.getMinutes();
+		  var s = today.getSeconds();
+		  m = checkTime(m);
+		  s = checkTime(s);
+		  document.getElementById('txt').innerHTML =
+		  "Real time: "+ h + ":" + m + ":" + s;
+		  document.getElementById('txt').style.fontSize = "xx-large";
+		  document.getElementById('txt').style.fontStyle = "italic";
+		  var t = setTimeout(startTime, 500);
+		}
+		function checkTime(i) {
+		  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+		  return i;
+		}
+</script>
+	</head>
+	<body onload="startTime()">
+		<div id="txt" ></div>
+		
+		<form action="cuoiky.php" method="POST">
+			
+			
+			<button type="submit" class="button button5" style="background-color: #6EAAEA;" name="fan" value="1">Fan ON</button>
+			<button type="submit" class="button btpos button5" style="background-color: #6EAAEA;" name="fan" value="0">Fan OFF</button>
+			<br>
+			<button type="submit" class="button button5" style="background-color: #6EEA97;" name="pump" value="1">Pump ON</button>
+			<button type="submit" class="button btpos button5" style="background-color: #6EEA97;" name="pump" value="0">Pump OFF</button>
+			<br>
+			<button type="submit" class="button button5" name="blue_led" value="1">Blue Led ON</button>
+			<button type="submit" class="button btpos button5" name="blue_led" value="0">Blue Led OFF</button>
+			<br>
+			<button type="submit" class="button button5" style="background-color: #F5E331;" name="white_led" value="1">White Led ON</button>
+			<button type="submit" class="button btpos button5" style="background-color: #F5E331;" name="white_led" value="0">White Led OFF</button>
+			<br>
+			<button type="submit" class="button button5" style="background-color: #31F552;" name="roof" value="0">Open Roof</button>
+			<button type="submit" class="button btpos button5" style="background-color: #31F552;" name="roof" value="1">Close Roof</button>
+			<br>
+			<button type="submit" class="btshutdown button5" name="shutdown" value="0">Shutdown all</button><br>
+			Alarm temperature (&#176C): <input type="text" name="temp" value="40" size="7" class="alarm"><br>
+			Alarm humidity(%):    <input type="text" name="humid" value="60" size="7" class="alarm" ><br>
+			Alarm light(lux):    <input type="text" name="light" value="5000" size="7" class="alarm" ><br>
+			<input type="submit" value="Submit"><br>
+		</form> 
+		
+		
+		
+    <div id="chart-container" class="canvasContainer" .canvas-container>
+        <canvas id="graphCanvas"></canvas>
+    </div>
+    <div id="chart-container1" class="canvasContainer" .canvas-container>
+        <canvas id="graphCanvas1"></canvas>
+    </div>
+    
+    <span class="dot1" id="nd"></span>
+    <img src="image/thermal.png" alt="thermalmeter" class="image1">
+    <span class="dot2" id="dam"></span>
+    <img src="image/humi.png" alt="humidsign" class="image2">
+    <span class="dot3" id="cdas"></span>
+    <img src="image/sun.jpg" alt="sunlight" class="image3">
+    <script>
+		// wait until the website is ready
+		$(document).ready(function () {
+            showGraph();
+            showGraph1();
+            showGraphaa();
+        });
+		setInterval(showGraph,10);
+		setInterval(showGraph1,10);
+		setInterval(showGraphaa,100);
+		function showGraphaa()
+        {
+            {
+                $.post("chart.php",
+                function (data)
+                {
+                    console.log(data);
+                    var temp = [];
+                    var humid = [];
+                    var light =[];
+                    for (var i in data) {
+                        temp.push(data[i].Temperature);
+                        humid.push(data[i].Humidity);
+                        light.push(data[i].Light);
+                    }
+					document.getElementById("nd").innerHTML = temp[29]+ "&#176"+" C";
+                    document.getElementById("dam").innerHTML = humid[29]+"&#37";
+                    document.getElementById("cdas").innerHTML = light[29]+" lx";
+                });
+            }
+        };
+		
+        function showGraph()
+        {
+            {
+                $.post("chart.php",
+                function (data)
+                {
+                    console.log(data);
+                    var label = [];
+                    var temp = [];
+                    var humid = [];
+                    
+                    for (var i in data) {
+                        label.push(data[i].Time);
+                        temp.push(data[i].Temperature);
+                        humid.push(data[i].Humidity);
+                    }
+
+                    var chartdata = {
+                        labels: label,
+                        datasets: [
+                            {
+								fill: false,
+                                label: 'Temperature data',
+                                backgroundColor: '#FF3C33',
+                                borderColor: '#FF3C33',
+                                //hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#040404',
+                                data: temp
+                            }
+                            , // dataset 2,
+                            {
+								fill: false,
+                                label: 'Humidity data',
+                                backgroundColor: '#51DFD0',
+                                borderColor: '#51DFD0',
+                                //hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#040404',
+                                data: humid
+                            }
+                        ]
+                    };
+
+                    var graphTarget = $("#graphCanvas");
+
+                    var barGraph = new Chart(graphTarget, {
+                        type: 'line',
+                        data: chartdata,
+                        options: {
+								animation: {
+								duration: 0
+							},
+							scales: {
+					yAxes: [{
+					    ticks: {
+						suggestedMin: 10,
+						suggestedMax: 100
+						}
+						}]
+					    }
+						}
+                    });
+                });
+            }
+        };
+        
+        function showGraph1()
+        {
+            {
+                $.post("chart.php",
+                function (data)
+                {
+                    console.log(data);
+                    var label = [];
+                    var light = [];
+                    
+                    for (var i in data) {
+                        label.push(data[i].Time);
+                        light.push(data[i].Light);
+                    }
+
+                    var chartdata = {
+                        labels: label,
+                        datasets: [
+                            {
+								fill: false,
+                                label: 'Light data',
+                                backgroundColor: '#FEFE21',
+                                borderColor: '#FEFE21',
+                                //hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#060000',
+                                data: light
+                            }
+                        ]
+                    };
+
+                    var graphTarget = $("#graphCanvas1");
+
+                    var barGraph = new Chart(graphTarget, {
+                        type: 'line',
+                        data: chartdata,
+                        options: {
+								animation: {
+								duration: 0
+							},
+							scales: {
+					yAxes: [{
+					    ticks: {
+						suggestedMin: 0,
+						suggestedMax: 70000
+						}
+						}]
+					    }
+						}
+                    });
+                });
+            }
+        }
+        </script>
+	</body>
+</html>
