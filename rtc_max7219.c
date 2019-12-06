@@ -24,7 +24,7 @@ void display(long int number)
 	{
 		buffer[0]=i;
 		if(i==3||i==5)
-			buffer[1]=number%10|0x80;//0x80:display dot, hien thi dấu chấm tại led thứ 3 & led thứ 5
+			buffer[1]=number%10|0x80;//0x80:display dot, hien thi dấu chấm tại led thứ 3 & led thứ 5, chia lấy dư hiển thị từ phải sang
 		else
 			buffer[1]=number%10;
 		number/=10;
