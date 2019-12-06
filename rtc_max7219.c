@@ -16,8 +16,8 @@ void display(long int number)
 	}
 
 	unsigned char buffer[2];
-	buffer[0] = 0x0B;//scan limit, gioi han so led sang
-	buffer[1] =5;
+	buffer[0] = 0x0B;//dia chi scan limit
+	buffer[1] =5;//scan limit 6 led sang
 	wiringPiSPIDataRW(0, buffer, 2);
 	if(count==4||count==5) count=6;//nếu thời gian là 00:xx:xx hoặc 0x:xx:xx thì led thứ 6 sẽ ko sáng do là số 0 vô nghĩa=>>để led sáng count =6
 	for(int i=1;i<=count;i++)
