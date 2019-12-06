@@ -94,7 +94,8 @@ int main(void)
 		else if(num_row>=50)
 		{
 			char cmd[200];
-			sprintf(cmd,"DELETE FROM sensor ORDER BY id LIMIT 1"); //sap xep tang dan va xoa di 1 gia tri
+			//delete 1st row
+			sprintf(cmd,"DELETE FROM sensor ORDER BY id LIMIT 1"); //order: sort type by id asc, limit 1 result
 			mysql_query(conn, cmd);
 			sprintf(cmd,"INSERT INTO sensor(Temperature,Humidity,Light,Time) VALUES(%.2f,%.2f,%.0f,'%d:%d:%d')",temp,humid,lux,h,m,s); 
 			mysql_query(conn, cmd);
