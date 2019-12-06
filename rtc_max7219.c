@@ -95,6 +95,7 @@ int main()
 		//year = (year >> 4 ) * 10 + (year & 0x0F) ;
 		//month = (month >> 4 ) * 10 + (month & 0x0F);
 		//date = (date >>4) * 10 + (date & 0x0F);
+		//BCD code 2 DEC
 		h = ( h >> 4 ) * 10 + (h & 0x0F);
 		m = ( m >> 4 ) * 10 + (m & 0x0F);
 		s = ( s >> 4 ) * 10 + (s & 0x0F);
