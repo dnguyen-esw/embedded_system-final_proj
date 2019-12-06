@@ -16,15 +16,15 @@ void display(long int number)
 	}
 
 	unsigned char buffer[2];
-	buffer[0] = 0x0B;//scan
+	buffer[0] = 0x0B;//scan limit, gioi han so led sang
 	buffer[1] =5;
 	wiringPiSPIDataRW(0, buffer, 2);
-	if(count==4||count==5) count=6;
+	if(count==4||count==5) count=6;//nếu thời gian là 00:xx:xx hoặc 0x:xx:xx thì led thứ 6 sẽ ko sáng do là số 0 vô nghĩa=>>để led sáng count =6
 	for(int i=1;i<=count;i++)
 	{
 		buffer[0]=i;
 		if(i==3||i==5)
-			buffer[1]=number%10|0x80;
+			buffer[1]=number%10|0x80;//0x80:display dot, hien thi dấu chấm tại led thứ 3 & led thứ 5
 		else
 			buffer[1]=number%10;
 		number/=10;
